@@ -14,11 +14,24 @@ body {
   font: inherit;
   padding: 8px;
   max-width: 320px;
+  margin-top: 20px;
   margin-bottom: 16px;
   margin-left: 40px;
 }
 
 .img {
   width: 200px;
-  height: 200px;
+  height: 100px;
+}
+
+.flag {
+  width: 100px;
+  height: 50px;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  padding: 8px;
 }

@@ -6,6 +6,7 @@ import Notiflix from 'notiflix';
 import fetchCountries  from './js/fetchCountries.js';
 import getRefs from './js/refs.js';
 
+
 import  cardCountry from '../templates/card-country.hbs';
 import listCountries from '../templates/list-countries.hbs';
 
@@ -44,12 +45,12 @@ function onSearch(evt) {
     .then(data => {
       if (data.length > 10) {
         clearData();
-        Notiflix.Notify.Info('Too many matches found. Please enter a more specific name.');
+        Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
       }
     })
     .catch(error => {
       clearData();
-      Notiflix.Notify.Failure('Oops, there is no country with that name');
+      Notiflix.Notify.failure('Oops, there is no country with that name');
     });
 }
 
