@@ -1,19 +1,12 @@
-import './css/styles.css';
-import debounce from 'lodash.debounce';
-import Notiflix from 'notiflix';
+import 'notiflix';
+import fetchCountries from './js/fetchCountries.js';
+import getRefs from './js/refs';
 
-
-import fetchCountries  from './js/fetchCountries.js';
-import getRefs from './js/refs.js';
-
-import  cardCountry from '../templates/card-country.hbs';
-import listCountries from '../templates/list-countries.hbs';
-
-
+import  './templates/card-country.hbs';
+import './templates/list-countries.hbs';
 
 const refs = getRefs();
 const DEBOUNCE_DELAY = 300;
-
 refs.input.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch(evt) {
@@ -30,30 +23,30 @@ function onSearch(evt) {
     .then(data => {
       if (data.length === 1) {
         clearData();
-        refs.countryList.innerHTML = cardCountry(data);
+        refs.countryCard.innerHTML = countryCardTpl(data);
       }
       return data;
     })
     .then(data => {
       if (data.length > 1 && data.length <= 10) {
         clearData();
-        refs.countryInfo.innerHTML = listCountries(data);
+        refs.countryInfo.innerHTML = countryInfoTpl(data);
       }
       return data;
     })
     .then(data => {
       if (data.length > 10) {
         clearData();
-        Notiflix.Notify.Info('Too many matches found. Please enter a more specific name.');
+        Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
       }
     })
     .catch(error => {
       clearData();
-      Notiflix.Notify.Failure('Oops, there is no country with that name');
+      Notiflix.Notify.failure('Oops, there is no country with that name');
     });
 }
 
 function clearData() {
-  refs.countryList.innerHTML = '';
+  refs.countryCard.innerHTML = '';
   refs.countryInfo.innerHTML = '';
 }
